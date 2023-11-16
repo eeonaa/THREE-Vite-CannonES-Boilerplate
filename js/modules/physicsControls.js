@@ -16,7 +16,8 @@ export default class PhysicsControls extends THREE.EventDispatcher {
         // Allows for the reading of the cameras pitch and yaw
         this.pitchObject = new THREE.Object3D()
         this.camera = camera
-        camera.position.y = 0.5
+        this.camera.position.y = 0.5
+        this.camera.position.z = 5
         this.pitchObject.add(camera)
 
         this.yawObject = new THREE.Object3D()
@@ -93,6 +94,7 @@ export default class PhysicsControls extends THREE.EventDispatcher {
         document.addEventListener('pointerlockerror', this.onPointerlockError)
         document.addEventListener('keydown', this.onKeyDown)
         document.addEventListener('keyup', this.onKeyUp)
+        document.addEventListener('wheel', this.zoom)
     }
 
     disconnect() {
@@ -101,6 +103,7 @@ export default class PhysicsControls extends THREE.EventDispatcher {
         document.removeEventListener('pointerlockerror', this.onPointerlockError)
         document.removeEventListener('keydown', this.onKeyDown)
         document.removeEventListener('keyup', this.onKeyUp)
+        document.removeEventListener('wheel', this.zoom)
     }
 
     dispose() {
@@ -199,6 +202,25 @@ export default class PhysicsControls extends THREE.EventDispatcher {
             case 'KeyD':
             case 'ArrowRight':
                 this.moveRight = false
+                break
+        }
+    }
+
+    zoom = (event) => {
+        if(!this.enabled) return
+
+        switch(event.deltaY) {
+            case -100:
+                if (this.camera.position.z <= 0) {
+                    return
+                }
+                this.camera.position.z += event.deltaY/200
+                break
+            case 100:
+                if (this.camera.position.z >= 5) {
+                    return
+                }
+                this.camera.position.z += event.deltaY/200
                 break
         }
     }

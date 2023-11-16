@@ -1,6 +1,4 @@
 import * as THREE from 'three'
-import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js'
-import { RenderPixelatedPass } from 'three/addons/postprocessing/RenderPixelatedPass.js'
 import Physics from './modules/physics.js'
 import Stats from 'stats.js'
 
@@ -14,12 +12,14 @@ export default class Main {
 
         this.renderer = new THREE.WebGLRenderer({antialias: true, canvas: this.canvas})
         this.renderer.setSize(this.width, this.height)
-        this.renderer.setClearColor(0x18191A, 1)
+        this.renderer.outputColorSpace = THREE.SRGBColorSpace
+        this.renderer.setClearColor('#000000', 1)
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+        delete this.renderer.domElement.dataset.engine
 
         this.scene = new THREE.Scene()
 
         this.camera = new THREE.PerspectiveCamera(70, this.width / this.height, 0.1, 50)
-        this.camera.position.z = 5
         this.scene.add(this.camera)
 
         this.ambientLight = new THREE.AmbientLight(0xffffff, 0.6)
@@ -31,19 +31,11 @@ export default class Main {
 
         this.scene.fog = new THREE.Fog(0x18191A, 25, 30)
 
-        this.composer = new EffectComposer(this.renderer)
-        this.renderPixelatedPass = new RenderPixelatedPass(4, this.scene, this.camera)
-        this.renderPixelatedPass.normalEdgeStrength = 0
-        this.renderPixelatedPass.depthEdgeStrength = 0.3
-        this.composer.addPass(this.renderPixelatedPass)
-
         this.stats = new Stats()
         this.stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
         document.body.appendChild(this.stats.dom)
 
         this.physics = new Physics(this)
-
-        this.postProcessing = false
 
         setInterval(() => {
             this.physics.render()
@@ -64,15 +56,7 @@ export default class Main {
     render() {
         this.stats.begin()
         this.windowResize()
-        switch(this.postProcessing) {
-            case true:
-                this.composer.render(this.scene, this.camera)
-                break
-
-            case false:
-                this.renderer.render(this.scene, this.camera)
-                break
-        }
+        this.renderer.render(this.scene, this.camera)
         this.stats.end()
         requestAnimationFrame(() => this.render())
     }

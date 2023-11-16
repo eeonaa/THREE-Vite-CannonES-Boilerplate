@@ -4,14 +4,14 @@ specifiers:
   cannon-es: ^0.20.0
   cannon-es-debugger: ^1.0.0
   stats.js: ^0.17.0
-  three: ^0.151.3
+  three: ^0.158.0
   vite: ^4.2.0
 
 dependencies:
   cannon-es: 0.20.0
-  cannon-es-debugger: 1.0.0_52gkjkxuioxus3h6l3okbpjh2e
+  cannon-es-debugger: 1.0.0_b7mqcov72dhd35w23xdrmurdje
   stats.js: 0.17.0
-  three: 0.151.3
+  three: 0.158.0
 
 devDependencies:
   vite: 4.3.9
@@ -216,7 +216,7 @@ packages:
     dev: true
     optional: true
 
-  /cannon-es-debugger/1.0.0_52gkjkxuioxus3h6l3okbpjh2e:
+  /cannon-es-debugger/1.0.0_b7mqcov72dhd35w23xdrmurdje:
     resolution: {integrity: sha512-sE9lDOBAYFKlh+0w+cvWKwUhJef8HYnUSVPWPL0jD15MAuVRQKno4QYZSGxgOoJkMR3mQqxL4bxys2b3RSWH8g==}
     peerDependencies:
       cannon-es: 0.x
@@ -227,7 +227,7 @@ packages:
         optional: true
     dependencies:
       cannon-es: 0.20.0
-      three: 0.151.3
+      three: 0.158.0
     dev: false
 
   /cannon-es/0.20.0:
@@ -308,8 +308,8 @@ packages:
     resolution: {integrity: sha512-hNKz8phvYLPEcRkeG1rsGmV5ChMjKDAWU7/OJJdDErPBNChQXxCo3WZurGpnWc6gZhAzEPFad1aVgyOANH1sMw==}
     dev: false
 
-  /three/0.151.3:
-    resolution: {integrity: sha512-+vbuqxFy8kzLeO5MgpBHUvP/EAiecaDwDuOPPDe6SbrZr96kccF0ktLngXc7xA7bzyd3N0t2f6mw3Z9y6JCojQ==}
+  /three/0.158.0:
+    resolution: {integrity: sha512-TALj4EOpdDPF1henk2Q+s17K61uEAAWQ7TJB68nr7FKxqwyDr3msOt5IWdbGm4TaWKjrtWS8DJJWe9JnvsWOhQ==}
     dev: false
 
   /vite/4.3.9:
